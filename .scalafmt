@@ -1,0 +1,3 @@
+--maxColumn 100
+--continuationIndentCallSite 2
+--spacesInImportCurlyBraces true
