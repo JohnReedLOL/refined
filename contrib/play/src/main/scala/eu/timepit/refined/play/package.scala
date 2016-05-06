@@ -1,9 +1,7 @@
 package eu.timepit.refined
 
-import eu.timepit.refined.api._
 import _root_.play.api.libs.json._
-
-import scala.language.higherKinds
+import eu.timepit.refined.api._
 
 package object play {
   implicit def writeRefined[T, P, F[_, _]](

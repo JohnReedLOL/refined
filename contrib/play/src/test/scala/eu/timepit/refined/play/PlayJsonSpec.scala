@@ -1,12 +1,12 @@
 package eu.timepit.refined.play
 
+import _root_.play.api.libs.json._
 import eu.timepit.refined.TestUtils._
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.auto._
 import eu.timepit.refined.numeric.Positive
 import org.scalacheck.Prop._
 import org.scalacheck.Properties
-import _root_.play.api.libs.json._
 import shapeless.test.illTyped
 
 class PlayJsonSpec extends Properties("PlayReadsWrites") {
