@@ -148,7 +148,6 @@ lazy val scodecJS = scodec.js
 lazy val play = project.in(file("contrib/play"))
   .settings(moduleName := s"$projectName-play")
   .settings(submoduleSettings: _*)
-  .settings(submoduleJvmSettings: _*)
   .settings(
     crossScalaVersions := Seq("2.11.8"),
     initialCommands := s"""
@@ -170,6 +169,10 @@ lazy val submoduleSettings =
   releaseSettings ++
   styleSettings
 
+// MiMa fails if a submodule is not released yet. So it is better to
+// rename that to mimaJvmSettings and add it only to submodules that
+// have already been released.
+// TODO: rename it!
 lazy val submoduleJvmSettings = Seq(
   mimaPreviousArtifacts := Set(groupId %% moduleName.value % latestVersion),
   mimaBinaryIssueFilters ++= {
