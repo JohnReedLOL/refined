@@ -32,7 +32,7 @@ val scodecVersion = "1.9.0"
 val playVersion = "2.5.0"
 
 val allSubprojects = List("core", "scalacheck", "scalaz", "scodec")
-val allSubprojectsJVM = allSubprojects.map(_ + "JVM")
+val allSubprojectsJVM = allSubprojects.map(_ + "JVM") :+ "play"
 val allSubprojectsJS = allSubprojects.map(_ + "JS")
 
 /// project definitions
