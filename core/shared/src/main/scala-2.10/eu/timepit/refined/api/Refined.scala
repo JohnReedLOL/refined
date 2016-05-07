@@ -6,7 +6,12 @@ package api
  * this class can be created with `[[refineV]]` and `[[refineMV]]` which
  * verify that the wrapped value satisfies `P`.
  */
-final case class Refined[T, P] private (get: T) {
+final class Refined[T, P] private (val get: T) extends Serializable {
+  override def hashCode: Int = get.##
+  override def equals(that: Any): Boolean = that match {
+    case that: Refined[_, _] => this.get == that.get
+    case _ => false
+  }
 
   override def toString: String =
     get.toString
@@ -20,4 +25,24 @@ object Refined {
    */
   def unsafeApply[T, P](t: T): Refined[T, P] =
     new Refined(t)
+
+  def unapply[T, P](r: Refined[T, P]): Option[T] =
+    Some(r.get)
+
 }
+
+/*
+Refined is not value class for Scala 2.10 because that would trigger
+compiler errors like this:
+
+[error] refined/core/shared/src/main/scala/eu/timepit/refined/api/RefType.scala:152:
+  bridge generated for member method unsafeWrap: [T, P](t: T)eu.timepit.refined.api.Refined[T,P]
+  in anonymous class $anon
+[error] which overrides method unsafeWrap: [T, P](t: T)F[T,P] in trait RefType
+[error] clashes with definition of the member itself;
+[error] both have erased type (t: Object)Object
+[error]       override def unsafeWrap[T, P](t: T): Refined[T, P] =
+[error]                    ^
+
+See https://issues.scala-lang.org/browse/SI-6260 for more information.
+*/

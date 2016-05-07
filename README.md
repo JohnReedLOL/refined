@@ -278,12 +278,13 @@ The library comes with these predefined predicates:
 * `Uri`: checks if a `String` is a valid URI
 * `Url`: checks if a `String` is a valid URL
 * `Uuid`: checks if a `String` is a valid UUID
-* `Xml`: checks if a `String` is valid XML
+* `Xml`: checks if a `String` is well-formed XML
 * `XPath`: checks if a `String` is a valid XPath expression
 
 ## Contributors and participation
 
 * [Alexandre Archambault](https://github.com/alexarchambault) ([@alxarchambault](https://twitter.com/alxarchambault))
+* [Dale Wijnand](https://github.com/dwijnand) ([@dwijnand](https://twitter.com/dwijnand))
 * [Frank S. Thomas](https://github.com/fthomas) ([@fst9000](https://twitter.com/fst9000))
 * [Jean-Rémi Desjardins](https://github.com/jedesah) ([@jrdesjardins](https://twitter.com/jrdesjardins))
 * [Shohei Shimomura](https://github.com/sh0hei) ([@sm0kym0nkey](https://twitter.com/sm0kym0nkey))

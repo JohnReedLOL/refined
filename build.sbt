@@ -181,7 +181,15 @@ lazy val submoduleJvmSettings = Seq(
     Seq(
       exclude[DirectMissingMethodProblem  ]("eu.timepit.refined.generic.evalValidate"),
       exclude[DirectMissingMethodProblem  ]("eu.timepit.refined.GenericValidate.evalValidate"),
-      exclude[ReversedMissingMethodProblem]("eu.timepit.refined.GenericValidate.evalValidate")
+      exclude[ReversedMissingMethodProblem]("eu.timepit.refined.GenericValidate.evalValidate"),
+      exclude[MissingTypesProblem]("eu.timepit.refined.api.Refined"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.productElement"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.productArity"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.canEqual"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.copy"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.productIterator"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.productPrefix"),
+      exclude[DirectMissingMethodProblem]("eu.timepit.refined.api.Refined.apply")
     )
   }
 )
@@ -355,12 +363,20 @@ lazy val styleSettings = Def.settings(
     (unmanagedSourceDirectories in Compile).value
 )
 
-val validateCommands =
-  (List("clean", "mimaReportBinaryIssues")
-    ++ allSubprojectsJS.map(_ + "/test")
-    ++ List("coverage")
-    ++ allSubprojectsJVM.map(_ + "/test")
-    ++ List("scalastyle", "test:scalastyle")
-    ++ List("doc", "docs/tut"))
+addCommandAlias("testJS",  allSubprojectsJS  map (_ + "/test") mkString (";", ";", ""))
+addCommandAlias("testJVM", allSubprojectsJVM map (_ + "/test") mkString (";", ";", ""))
+
+val validateCommands = List(
+  "clean",
+  "mimaReportBinaryIssues",
+  "coverageOff",
+  "testJS",
+  "coverage",
+  "testJVM",
+  "scalastyle",
+  "test:scalastyle",
+  "doc",
+  "docs/tut"
+)
 
 addCommandAlias("validate", validateCommands.mkString(";", ";", ""))
