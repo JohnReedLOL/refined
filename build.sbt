@@ -334,10 +334,6 @@ lazy val myDoctestSettings = Def.settings(
 
 lazy val styleSettings = Def.settings(
   scalafmtConfig := Some(file(".scalafmt")),
-  sourceDirectories in (Compile, org.scalafmt.sbt.ScalaFmtPlugin.autoImport.hasScalafmt) :=
-    (sourceDirectories in Compile).value,
-  sourceDirectories in (Test, org.scalafmt.sbt.ScalaFmtPlugin.autoImport.hasScalafmt) :=
-    (sourceDirectories in Test).value,
 
   // workaround for https://github.com/scalastyle/scalastyle-sbt-plugin/issues/47
   scalastyleSources in Compile :=
